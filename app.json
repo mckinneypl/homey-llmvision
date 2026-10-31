@@ -1,0 +1,1047 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "com.percy.llmvision",
+  "version": "1.7.0",
+  "brandColor": "#2563EB",
+  "compatibility": ">=12.4.0",
+  "sdk": 3,
+  "runtime": "nodejs",
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "LLM Vision"
+  },
+  "description": {
+    "en": "AI Vision Analysis"
+  },
+  "category": [
+    "appliances"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Percy Mckinney",
+    "email": "pmckin@usa.net"
+  },
+  "flow": {
+    "actions": [
+      {
+        "title": {
+          "en": "Add image to batch"
+        },
+        "titleFormatted": {
+          "en": "Add [[droptoken]] from [[source_name]] to image batch [[batch_id]]"
+        },
+        "hint": {
+          "en": "Add one camera image to a multi-camera analysis batch and return the exact frozen image added to the batch."
+        },
+        "droptoken": [
+          "image"
+        ],
+        "args": [
+          {
+            "type": "text",
+            "name": "batch_id",
+            "title": {
+              "en": "Batch name"
+            },
+            "placeholder": {
+              "en": "front_delivery"
+            }
+          },
+          {
+            "type": "text",
+            "name": "source_name",
+            "title": {
+              "en": "Camera name"
+            },
+            "placeholder": {
+              "en": "Driveway"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "image_count",
+            "type": "number",
+            "title": {
+              "en": "Images in Batch"
+            }
+          },
+          {
+            "name": "captured_image",
+            "type": "image",
+            "title": {
+              "en": "Captured Image"
+            }
+          }
+        ],
+        "id": "add_image_to_batch"
+      },
+      {
+        "title": {
+          "en": "Add multiple images to batch"
+        },
+        "titleFormatted": {
+          "en": "Add [[droptoken]] from [[source_name]] to batch [[batch_id]]: [[frame_count]] frames, [[delay_seconds]] seconds apart, batch limit [[batch_limit]]"
+        },
+        "hint": {
+          "en": "Read the supplied Homey image token repeatedly and add each captured frame to a named batch. Whether frames refresh depends on the source image token."
+        },
+        "droptoken": [
+          "image"
+        ],
+        "args": [
+          {
+            "type": "text",
+            "name": "batch_id",
+            "title": {
+              "en": "Batch name"
+            },
+            "placeholder": {
+              "en": "front_perimeter"
+            }
+          },
+          {
+            "type": "text",
+            "name": "source_name",
+            "title": {
+              "en": "Camera name"
+            },
+            "placeholder": {
+              "en": "Front Door"
+            }
+          },
+          {
+            "type": "number",
+            "name": "frame_count",
+            "title": {
+              "en": "Number of frames"
+            },
+            "min": 1,
+            "max": 32,
+            "step": 1
+          },
+          {
+            "type": "number",
+            "name": "delay_seconds",
+            "title": {
+              "en": "Seconds between frames"
+            },
+            "min": 1,
+            "max": 10,
+            "step": 1
+          },
+          {
+            "type": "number",
+            "name": "batch_limit",
+            "title": {
+              "en": "Maximum images in batch"
+            },
+            "min": 12,
+            "max": 32,
+            "step": 1
+          }
+        ],
+        "tokens": [
+          {
+            "name": "frames_requested",
+            "type": "number",
+            "title": {
+              "en": "Frames Requested"
+            }
+          },
+          {
+            "name": "frames_captured",
+            "type": "number",
+            "title": {
+              "en": "Frames Captured"
+            }
+          },
+          {
+            "name": "duplicate_frames",
+            "type": "number",
+            "title": {
+              "en": "Duplicate Frames"
+            }
+          },
+          {
+            "name": "images_in_batch",
+            "type": "number",
+            "title": {
+              "en": "Images in Batch"
+            }
+          },
+          {
+            "name": "last_captured_image",
+            "type": "image",
+            "title": {
+              "en": "Last Captured Image"
+            }
+          },
+          {
+            "name": "capture_status",
+            "type": "string",
+            "title": {
+              "en": "Capture Status"
+            }
+          },
+          {
+            "name": "batch_limit",
+            "type": "number",
+            "title": {
+              "en": "Batch Limit"
+            }
+          }
+        ],
+        "id": "add_multiple_images_to_batch"
+      },
+      {
+        "title": {
+          "en": "Analyze camera activity"
+        },
+        "titleFormatted": {
+          "en": "Analyze [[droptoken]] with [[provider]] using [[model]] over [[capture_seconds]] seconds using [[frame_count]] frames: [[prompt]]"
+        },
+        "hint": {
+          "en": "Analyze a sequence of camera frames and return structured event information."
+        },
+        "droptoken": [
+          "image"
+        ],
+        "args": [
+          {
+            "type": "dropdown",
+            "name": "provider",
+            "title": {
+              "en": "AI Provider"
+            },
+            "values": [
+              {
+                "id": "openai",
+                "title": {
+                  "en": "OpenAI"
+                }
+              },
+              {
+                "id": "gemini",
+                "title": {
+                  "en": "Google Gemini"
+                }
+              },
+              {
+                "id": "claude",
+                "title": {
+                  "en": "Anthropic Claude"
+                }
+              },
+              {
+                "id": "openai_compatible",
+                "title": {
+                  "en": "OpenAI-Compatible / Local"
+                }
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "name": "model",
+            "required": false,
+            "title": {
+              "en": "Model"
+            },
+            "placeholder": {
+              "en": "Optional - use provider default"
+            }
+          },
+          {
+            "type": "number",
+            "name": "capture_seconds",
+            "title": {
+              "en": "Capture duration in seconds"
+            },
+            "min": 1,
+            "max": 60,
+            "step": 1
+          },
+          {
+            "type": "number",
+            "name": "frame_count",
+            "title": {
+              "en": "Number of frames"
+            },
+            "min": 1,
+            "max": 20,
+            "step": 1
+          },
+          {
+            "type": "text",
+            "name": "prompt",
+            "title": {
+              "en": "Prompt"
+            },
+            "placeholder": {
+              "en": "Describe what happened during this event."
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "summary",
+            "type": "string",
+            "title": {
+              "en": "Summary"
+            }
+          },
+          {
+            "name": "activity",
+            "type": "string",
+            "title": {
+              "en": "Activity"
+            }
+          },
+          {
+            "name": "person_present",
+            "type": "boolean",
+            "title": {
+              "en": "Person Present"
+            }
+          },
+          {
+            "name": "vehicle_present",
+            "type": "boolean",
+            "title": {
+              "en": "Vehicle Present"
+            }
+          },
+          {
+            "name": "delivery_vehicle",
+            "type": "boolean",
+            "title": {
+              "en": "Delivery Vehicle"
+            }
+          },
+          {
+            "name": "delivery_company",
+            "type": "string",
+            "title": {
+              "en": "Delivery Company"
+            }
+          },
+          {
+            "name": "package_present",
+            "type": "boolean",
+            "title": {
+              "en": "Package Present"
+            }
+          },
+          {
+            "name": "package_delivered",
+            "type": "boolean",
+            "title": {
+              "en": "Package Delivered"
+            }
+          },
+          {
+            "name": "person_approaching",
+            "type": "boolean",
+            "title": {
+              "en": "Person Approaching"
+            }
+          },
+          {
+            "name": "person_leaving",
+            "type": "boolean",
+            "title": {
+              "en": "Person Leaving"
+            }
+          },
+          {
+            "name": "vehicle_arrived",
+            "type": "boolean",
+            "title": {
+              "en": "Vehicle Arrived"
+            }
+          },
+          {
+            "name": "vehicle_departed",
+            "type": "boolean",
+            "title": {
+              "en": "Vehicle Departed"
+            }
+          },
+          {
+            "name": "loitering",
+            "type": "boolean",
+            "title": {
+              "en": "Loitering"
+            }
+          },
+          {
+            "name": "security_level",
+            "type": "string",
+            "title": {
+              "en": "Security Level"
+            }
+          },
+          {
+            "name": "confidence",
+            "type": "number",
+            "title": {
+              "en": "Confidence"
+            }
+          },
+          {
+            "name": "provider_used",
+            "type": "string",
+            "title": {
+              "en": "Provider Used"
+            }
+          },
+          {
+            "name": "model_used",
+            "type": "string",
+            "title": {
+              "en": "Model Used"
+            }
+          }
+        ],
+        "id": "analyze_camera_activity"
+      },
+      {
+        "title": {
+          "en": "Analyze image batch"
+        },
+        "titleFormatted": {
+          "en": "Analyze image batch [[batch_id]] with [[provider]] using [[model]]: [[prompt]]"
+        },
+        "hint": {
+          "en": "Analyze images collected from multiple cameras as one event."
+        },
+        "args": [
+          {
+            "type": "text",
+            "name": "batch_id",
+            "title": {
+              "en": "Batch name"
+            },
+            "placeholder": {
+              "en": "front_delivery"
+            }
+          },
+          {
+            "type": "dropdown",
+            "name": "provider",
+            "title": {
+              "en": "AI Provider"
+            },
+            "values": [
+              {
+                "id": "openai",
+                "title": {
+                  "en": "OpenAI"
+                }
+              },
+              {
+                "id": "gemini",
+                "title": {
+                  "en": "Google Gemini"
+                }
+              },
+              {
+                "id": "claude",
+                "title": {
+                  "en": "Anthropic Claude"
+                }
+              },
+              {
+                "id": "openai_compatible",
+                "title": {
+                  "en": "OpenAI-Compatible / Local"
+                }
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "name": "model",
+            "required": false,
+            "title": {
+              "en": "Model"
+            },
+            "placeholder": {
+              "en": "Optional - use provider default"
+            }
+          },
+          {
+            "type": "text",
+            "name": "prompt",
+            "title": {
+              "en": "Prompt"
+            },
+            "placeholder": {
+              "en": "Describe the event across these cameras."
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "summary",
+            "type": "string",
+            "title": {
+              "en": "Summary"
+            }
+          },
+          {
+            "name": "activity",
+            "type": "string",
+            "title": {
+              "en": "Activity"
+            }
+          },
+          {
+            "name": "person_present",
+            "type": "boolean",
+            "title": {
+              "en": "Person Present"
+            }
+          },
+          {
+            "name": "vehicle_present",
+            "type": "boolean",
+            "title": {
+              "en": "Vehicle Present"
+            }
+          },
+          {
+            "name": "delivery_vehicle",
+            "type": "boolean",
+            "title": {
+              "en": "Delivery Vehicle"
+            }
+          },
+          {
+            "name": "delivery_company",
+            "type": "string",
+            "title": {
+              "en": "Delivery Company"
+            }
+          },
+          {
+            "name": "package_present",
+            "type": "boolean",
+            "title": {
+              "en": "Package Present"
+            }
+          },
+          {
+            "name": "package_delivered",
+            "type": "boolean",
+            "title": {
+              "en": "Package Delivered"
+            }
+          },
+          {
+            "name": "person_approaching",
+            "type": "boolean",
+            "title": {
+              "en": "Person Approaching"
+            }
+          },
+          {
+            "name": "person_leaving",
+            "type": "boolean",
+            "title": {
+              "en": "Person Leaving"
+            }
+          },
+          {
+            "name": "vehicle_arrived",
+            "type": "boolean",
+            "title": {
+              "en": "Vehicle Arrived"
+            }
+          },
+          {
+            "name": "vehicle_departed",
+            "type": "boolean",
+            "title": {
+              "en": "Vehicle Departed"
+            }
+          },
+          {
+            "name": "loitering",
+            "type": "boolean",
+            "title": {
+              "en": "Loitering"
+            }
+          },
+          {
+            "name": "security_level",
+            "type": "string",
+            "title": {
+              "en": "Security Level"
+            }
+          },
+          {
+            "name": "confidence",
+            "type": "number",
+            "title": {
+              "en": "Confidence"
+            }
+          },
+          {
+            "name": "image_count",
+            "type": "number",
+            "title": {
+              "en": "Images Analyzed"
+            }
+          },
+          {
+            "name": "provider_used",
+            "type": "string",
+            "title": {
+              "en": "Provider Used"
+            }
+          },
+          {
+            "name": "model_used",
+            "type": "string",
+            "title": {
+              "en": "Model Used"
+            }
+          },
+          {
+            "name": "best_image",
+            "type": "image",
+            "title": {
+              "en": "Best Image"
+            }
+          },
+          {
+            "name": "best_image_camera",
+            "type": "string",
+            "title": {
+              "en": "Best Image Camera"
+            }
+          },
+          {
+            "name": "best_image_reason",
+            "type": "string",
+            "title": {
+              "en": "Best Image Reason"
+            }
+          }
+        ],
+        "id": "analyze_image_batch"
+      },
+      {
+        "title": {
+          "en": "Analyze single image"
+        },
+        "titleFormatted": {
+          "en": "Analyze [[droptoken]] with [[provider]] using [[model]]: [[prompt]]"
+        },
+        "hint": {
+          "en": "Analyze one supplied image with a free-form prompt and return the AI response as an Advanced Flow tag."
+        },
+        "droptoken": [
+          "image"
+        ],
+        "args": [
+          {
+            "type": "dropdown",
+            "name": "provider",
+            "title": {
+              "en": "AI Provider"
+            },
+            "values": [
+              {
+                "id": "openai",
+                "title": {
+                  "en": "OpenAI"
+                }
+              },
+              {
+                "id": "gemini",
+                "title": {
+                  "en": "Google Gemini"
+                }
+              },
+              {
+                "id": "claude",
+                "title": {
+                  "en": "Anthropic Claude"
+                }
+              },
+              {
+                "id": "openai_compatible",
+                "title": {
+                  "en": "OpenAI-Compatible / Local"
+                }
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "name": "model",
+            "required": false,
+            "title": {
+              "en": "Model"
+            },
+            "placeholder": {
+              "en": "Optional - use provider default"
+            }
+          },
+          {
+            "type": "text",
+            "name": "prompt",
+            "title": {
+              "en": "Prompt"
+            },
+            "placeholder": {
+              "en": "Describe this image."
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "response",
+            "type": "string",
+            "title": {
+              "en": "Response"
+            }
+          },
+          {
+            "name": "provider_used",
+            "type": "string",
+            "title": {
+              "en": "Provider Used"
+            }
+          },
+          {
+            "name": "model_used",
+            "type": "string",
+            "title": {
+              "en": "Model Used"
+            }
+          }
+        ],
+        "id": "analyze_single_image"
+      },
+      {
+        "title": {
+          "en": "Analyze single image - structured"
+        },
+        "titleFormatted": {
+          "en": "Analyze [[droptoken]] with structured output using [[provider]] and [[model]]: [[prompt]]"
+        },
+        "hint": {
+          "en": "Analyze one supplied security-camera image and return structured Advanced Flow tags for people, vehicles, deliveries, packages, activity, and confidence."
+        },
+        "droptoken": [
+          "image"
+        ],
+        "args": [
+          {
+            "type": "dropdown",
+            "name": "provider",
+            "title": {
+              "en": "AI Provider"
+            },
+            "values": [
+              {
+                "id": "openai",
+                "title": {
+                  "en": "OpenAI"
+                }
+              },
+              {
+                "id": "gemini",
+                "title": {
+                  "en": "Google Gemini"
+                }
+              },
+              {
+                "id": "claude",
+                "title": {
+                  "en": "Anthropic Claude"
+                }
+              },
+              {
+                "id": "openai_compatible",
+                "title": {
+                  "en": "OpenAI-Compatible / Local"
+                }
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "name": "model",
+            "required": false,
+            "title": {
+              "en": "Model"
+            },
+            "placeholder": {
+              "en": "Optional - use provider default"
+            }
+          },
+          {
+            "type": "text",
+            "name": "prompt",
+            "required": false,
+            "title": {
+              "en": "Prompt"
+            },
+            "placeholder": {
+              "en": "Describe the security-relevant activity visible in this image."
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "summary",
+            "type": "string",
+            "title": {
+              "en": "Summary"
+            }
+          },
+          {
+            "name": "activity",
+            "type": "string",
+            "title": {
+              "en": "Activity"
+            }
+          },
+          {
+            "name": "person_present",
+            "type": "boolean",
+            "title": {
+              "en": "Person Present"
+            }
+          },
+          {
+            "name": "vehicle_present",
+            "type": "boolean",
+            "title": {
+              "en": "Vehicle Present"
+            }
+          },
+          {
+            "name": "delivery_vehicle",
+            "type": "boolean",
+            "title": {
+              "en": "Delivery Vehicle"
+            }
+          },
+          {
+            "name": "delivery_company",
+            "type": "string",
+            "title": {
+              "en": "Delivery Company"
+            }
+          },
+          {
+            "name": "package_present",
+            "type": "boolean",
+            "title": {
+              "en": "Package Present"
+            }
+          },
+          {
+            "name": "package_delivered",
+            "type": "boolean",
+            "title": {
+              "en": "Package Delivered"
+            }
+          },
+          {
+            "name": "person_approaching",
+            "type": "boolean",
+            "title": {
+              "en": "Person Approaching"
+            }
+          },
+          {
+            "name": "person_leaving",
+            "type": "boolean",
+            "title": {
+              "en": "Person Leaving"
+            }
+          },
+          {
+            "name": "vehicle_arrived",
+            "type": "boolean",
+            "title": {
+              "en": "Vehicle Arrived"
+            }
+          },
+          {
+            "name": "vehicle_departed",
+            "type": "boolean",
+            "title": {
+              "en": "Vehicle Departed"
+            }
+          },
+          {
+            "name": "loitering",
+            "type": "boolean",
+            "title": {
+              "en": "Loitering"
+            }
+          },
+          {
+            "name": "security_level",
+            "type": "string",
+            "title": {
+              "en": "Security Level"
+            }
+          },
+          {
+            "name": "confidence",
+            "type": "number",
+            "title": {
+              "en": "Confidence"
+            }
+          },
+          {
+            "name": "provider_used",
+            "type": "string",
+            "title": {
+              "en": "Provider Used"
+            }
+          },
+          {
+            "name": "model_used",
+            "type": "string",
+            "title": {
+              "en": "Model Used"
+            }
+          }
+        ],
+        "id": "analyze_single_image_structured"
+      },
+      {
+        "title": {
+          "en": "Clear image batch"
+        },
+        "titleFormatted": {
+          "en": "Clear image batch [[batch_id]]"
+        },
+        "hint": {
+          "en": "Start a fresh multi-camera image collection."
+        },
+        "args": [
+          {
+            "type": "text",
+            "name": "batch_id",
+            "title": {
+              "en": "Batch name"
+            },
+            "placeholder": {
+              "en": "front_delivery"
+            }
+          }
+        ],
+        "id": "clear_image_batch"
+      },
+      {
+        "title": {
+          "en": "Send text prompt to AI"
+        },
+        "titleFormatted": {
+          "en": "Send [[prompt]] to [[provider]] using [[model]]"
+        },
+        "hint": {
+          "en": "Send a text-only prompt to the selected AI provider and return the response as an Advanced Flow tag."
+        },
+        "args": [
+          {
+            "type": "dropdown",
+            "name": "provider",
+            "title": {
+              "en": "AI Provider"
+            },
+            "values": [
+              {
+                "id": "openai",
+                "title": {
+                  "en": "OpenAI"
+                }
+              },
+              {
+                "id": "gemini",
+                "title": {
+                  "en": "Google Gemini"
+                }
+              },
+              {
+                "id": "claude",
+                "title": {
+                  "en": "Anthropic Claude"
+                }
+              },
+              {
+                "id": "openai_compatible",
+                "title": {
+                  "en": "OpenAI-Compatible / Local"
+                }
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "name": "model",
+            "required": false,
+            "title": {
+              "en": "Model"
+            },
+            "placeholder": {
+              "en": "Optional - use provider default"
+            }
+          },
+          {
+            "type": "text",
+            "name": "prompt",
+            "title": {
+              "en": "Prompt"
+            },
+            "placeholder": {
+              "en": "Enter your prompt"
+            }
+          }
+        ],
+        "tokens": [
+          {
+            "name": "response",
+            "type": "string",
+            "title": {
+              "en": "Response"
+            }
+          },
+          {
+            "name": "provider_used",
+            "type": "string",
+            "title": {
+              "en": "Provider Used"
+            }
+          },
+          {
+            "name": "model_used",
+            "type": "string",
+            "title": {
+              "en": "Model Used"
+            }
+          }
+        ],
+        "id": "send_text_prompt"
+      }
+    ]
+  }
+}

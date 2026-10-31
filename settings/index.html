@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>LLM Vision Settings</title>
+</head>
+  <script
+     type="text/javascript"
+     src="/homey.js"
+     data-origin="settings"
+   ></script>
+</head>
+<body>
+
+  <h2>LLM Vision Providers</h2>
+
+  <p>
+    Configure the AI providers you want LLM Vision to use.
+    You only need to enter credentials for providers you plan to use.
+  </p>
+
+  <fieldset>
+    <legend><strong>OpenAI</strong></legend>
+
+    <div class="field row">
+      <label for="openai_api_key">API Key</label>
+      <input
+        id="openai_api_key"
+        type="password"
+        placeholder="sk-..."
+      >
+    </div>
+
+    <div class="field row">
+      <label for="openai_default_model">Default Model</label>
+      <input
+        id="openai_default_model"
+        type="text"
+        placeholder="gpt-4.1-mini"
+      >
+    </div>
+  </fieldset>
+
+  <br>
+
+  <fieldset>
+    <legend><strong>Google Gemini</strong></legend>
+
+    <div class="field row">
+      <label for="gemini_api_key">API Key</label>
+      <input
+        id="gemini_api_key"
+        type="password"
+      >
+    </div>
+
+    <div class="field row">
+      <label for="gemini_default_model">Default Model</label>
+      <input
+        id="gemini_default_model"
+        type="text"
+        placeholder="gemini-2.5-flash"
+      >
+    </div>
+  </fieldset>
+
+  <br>
+
+  <fieldset>
+    <legend><strong>Anthropic Claude</strong></legend>
+
+    <div class="field row">
+      <label for="claude_api_key">API Key</label>
+      <input
+        id="claude_api_key"
+        type="password"
+      >
+    </div>
+
+    <div class="field row">
+      <label for="claude_default_model">Default Model</label>
+      <input
+        id="claude_default_model"
+        type="text"
+        placeholder="claude-sonnet"
+      >
+    </div>
+  </fieldset>
+
+  <br>
+
+  <fieldset>
+    <legend><strong>OpenAI-Compatible / Local</strong></legend>
+
+    <div class="field row">
+      <label for="compatible_base_url">Base URL</label>
+      <input
+        id="compatible_base_url"
+        type="text"
+        placeholder="http://192.168.1.100:11434/v1"
+      >
+    </div>
+
+    <div class="field row">
+      <label for="compatible_api_key">API Key</label>
+      <input
+        id="compatible_api_key"
+        type="password"
+        placeholder="Optional"
+      >
+    </div>
+
+    <div class="field row">
+      <label for="compatible_default_model">Default Model</label>
+      <input
+        id="compatible_default_model"
+        type="text"
+        placeholder="llava"
+      >
+    </div>
+  </fieldset>
+
+  <br>
+
+  <button id="save" class="right">Save Settings</button>
+
+  <script type="text/javascript">
+
+    function onHomeyReady(Homey) {
+
+      const settings = [
+        'openai_api_key',
+        'openai_default_model',
+        'gemini_api_key',
+        'gemini_default_model',
+        'claude_api_key',
+        'claude_default_model',
+        'compatible_base_url',
+        'compatible_api_key',
+        'compatible_default_model'
+      ];
+
+      settings.forEach(key => {
+        Homey.get(key, (err, value) => {
+          if (err) {
+            Homey.alert(err);
+            return;
+          }
+
+          if (value !== null && value !== undefined) {
+            document.getElementById(key).value = value;
+          }
+        });
+      });
+
+      document.getElementById('save').addEventListener('click', () => {
+
+        let remaining = settings.length;
+        let failed = false;
+
+        settings.forEach(key => {
+
+          const value = document.getElementById(key).value.trim();
+
+          Homey.set(key, value, err => {
+
+            if (err && !failed) {
+              failed = true;
+              Homey.alert(err);
+            }
+
+            remaining--;
+
+            if (remaining === 0 && !failed) {
+              Homey.alert('Settings saved.');
+            }
+
+          });
+
+        });
+
+      });
+
+      Homey.ready();
+    }
+
+  </script>
+
+</body>
+</html>
