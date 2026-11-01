@@ -1,0 +1,226 @@
+{
+  "title": {
+    "en": "Analyze image batch"
+  },
+  "titleFormatted": {
+    "en": "Analyze image batch [[batch_id]] with [[provider]] using [[model]]: [[prompt]]"
+  },
+  "hint": {
+    "en": "Analyze images collected from multiple cameras as one event."
+  },
+  "args": [
+    {
+      "type": "text",
+      "name": "batch_id",
+      "title": {
+        "en": "Batch name"
+      },
+      "placeholder": {
+        "en": "front_delivery"
+      }
+    },
+    {
+      "type": "dropdown",
+      "name": "provider",
+      "title": {
+        "en": "AI Provider"
+      },
+      "values": [
+        {
+          "id": "openai",
+          "title": {
+            "en": "OpenAI"
+          }
+        },
+        {
+          "id": "gemini",
+          "title": {
+            "en": "Google Gemini"
+          }
+        },
+        {
+          "id": "claude",
+          "title": {
+            "en": "Anthropic Claude"
+          }
+        },
+        {
+          "id": "openai_compatible",
+          "title": {
+            "en": "OpenAI-Compatible / Local"
+          }
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "model",
+      "required": false,
+      "title": {
+        "en": "Model"
+      },
+      "placeholder": {
+        "en": "Optional - use provider default"
+      }
+    },
+    {
+      "type": "text",
+      "name": "prompt",
+      "title": {
+        "en": "Prompt"
+      },
+      "placeholder": {
+        "en": "Describe the event across these cameras."
+      }
+    }
+  ],
+  "tokens": [
+    {
+      "name": "summary",
+      "type": "string",
+      "title": {
+        "en": "Summary"
+      }
+    },
+    {
+      "name": "activity",
+      "type": "string",
+      "title": {
+        "en": "Activity"
+      }
+    },
+    {
+      "name": "person_present",
+      "type": "boolean",
+      "title": {
+        "en": "Person Present"
+      }
+    },
+    {
+      "name": "vehicle_present",
+      "type": "boolean",
+      "title": {
+        "en": "Vehicle Present"
+      }
+    },
+    {
+      "name": "delivery_vehicle",
+      "type": "boolean",
+      "title": {
+        "en": "Delivery Vehicle"
+      }
+    },
+    {
+      "name": "delivery_company",
+      "type": "string",
+      "title": {
+        "en": "Delivery Company"
+      }
+    },
+    {
+      "name": "package_present",
+      "type": "boolean",
+      "title": {
+        "en": "Package Present"
+      }
+    },
+    {
+      "name": "package_delivered",
+      "type": "boolean",
+      "title": {
+        "en": "Package Delivered"
+      }
+    },
+    {
+      "name": "person_approaching",
+      "type": "boolean",
+      "title": {
+        "en": "Person Approaching"
+      }
+    },
+    {
+      "name": "person_leaving",
+      "type": "boolean",
+      "title": {
+        "en": "Person Leaving"
+      }
+    },
+    {
+      "name": "vehicle_arrived",
+      "type": "boolean",
+      "title": {
+        "en": "Vehicle Arrived"
+      }
+    },
+    {
+      "name": "vehicle_departed",
+      "type": "boolean",
+      "title": {
+        "en": "Vehicle Departed"
+      }
+    },
+    {
+      "name": "loitering",
+      "type": "boolean",
+      "title": {
+        "en": "Loitering"
+      }
+    },
+    {
+      "name": "security_level",
+      "type": "string",
+      "title": {
+        "en": "Security Level"
+      }
+    },
+    {
+      "name": "confidence",
+      "type": "number",
+      "title": {
+        "en": "Confidence"
+      }
+    },
+    {
+      "name": "image_count",
+      "type": "number",
+      "title": {
+        "en": "Images Analyzed"
+      }
+    },
+    {
+      "name": "provider_used",
+      "type": "string",
+      "title": {
+        "en": "Provider Used"
+      }
+    },
+    {
+      "name": "model_used",
+      "type": "string",
+      "title": {
+        "en": "Model Used"
+      }
+    },
+    {
+      "name": "best_image",
+      "type": "image",
+      "title": {
+        "en": "Best Image"
+      }
+    },
+    {
+      "name": "best_image_camera",
+      "type": "string",
+      "title": {
+        "en": "Best Image Camera"
+      }
+    },
+    {
+      "name": "best_image_reason",
+      "type": "string",
+      "title": {
+        "en": "Best Image Reason"
+      }
+    }
+  ]
+}

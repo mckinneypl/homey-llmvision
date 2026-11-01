@@ -1,0 +1,23 @@
+{
+  "title": {
+    "en": "Clear image batch"
+  },
+  "titleFormatted": {
+    "en": "Clear image batch [[batch_id]]"
+  },
+  "hint": {
+    "en": "Start a fresh multi-camera image collection."
+  },
+  "args": [
+    {
+      "type": "text",
+      "name": "batch_id",
+      "title": {
+        "en": "Batch name"
+      },
+      "placeholder": {
+        "en": "front_delivery"
+      }
+    }
+  ]
+}

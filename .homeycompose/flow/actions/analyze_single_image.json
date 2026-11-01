@@ -1,0 +1,37 @@
+{
+  "title": {"en": "Analyze single image"},
+  "titleFormatted": {"en": "Analyze [[droptoken]] with [[provider]] using [[model]]: [[prompt]]"},
+  "hint": {"en": "Analyze one supplied image with a free-form prompt and return the AI response as an Advanced Flow tag."},
+  "droptoken": ["image"],
+  "args": [
+    {
+      "type": "dropdown",
+      "name": "provider",
+      "title": {"en": "AI Provider"},
+      "values": [
+        {"id": "openai", "title": {"en": "OpenAI"}},
+        {"id": "gemini", "title": {"en": "Google Gemini"}},
+        {"id": "claude", "title": {"en": "Anthropic Claude"}},
+        {"id": "openai_compatible", "title": {"en": "OpenAI-Compatible / Local"}}
+      ]
+    },
+    {
+      "type": "text",
+      "name": "model",
+      "required": false,
+      "title": {"en": "Model"},
+      "placeholder": {"en": "Optional - use provider default"}
+    },
+    {
+      "type": "text",
+      "name": "prompt",
+      "title": {"en": "Prompt"},
+      "placeholder": {"en": "Describe this image."}
+    }
+  ],
+  "tokens": [
+    {"name": "response", "type": "string", "title": {"en": "Response"}},
+    {"name": "provider_used", "type": "string", "title": {"en": "Provider Used"}},
+    {"name": "model_used", "type": "string", "title": {"en": "Model Used"}}
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "com.percy.llmvision",
+  "version": "1.7.0",
+  "brandColor": "#2563EB",
+  "compatibility": ">=12.4.0",
+  "sdk": 3,
+  "runtime": "nodejs",
+  "platforms": [
+    "local"
+  ],
+  "name": {
+    "en": "LLM Vision"
+  },
+  "description": {
+    "en": "AI Vision Analysis"
+  },
+  "category": [
+    "appliances"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Percy Mckinney",
+    "email": "pmckin@usa.net"
+  }
+}

@@ -1,0 +1,211 @@
+{
+  "title": {
+    "en": "Analyze camera activity"
+  },
+  "titleFormatted": {
+    "en": "Analyze [[droptoken]] with [[provider]] using [[model]] over [[capture_seconds]] seconds using [[frame_count]] frames: [[prompt]]"
+  },
+  "hint": {
+    "en": "Analyze a sequence of camera frames and return structured event information."
+  },
+  "droptoken": [
+    "image"
+  ],
+  "args": [
+    {
+      "type": "dropdown",
+      "name": "provider",
+      "title": {
+        "en": "AI Provider"
+      },
+      "values": [
+        {
+          "id": "openai",
+          "title": {
+            "en": "OpenAI"
+          }
+        },
+        {
+          "id": "gemini",
+          "title": {
+            "en": "Google Gemini"
+          }
+        },
+        {
+          "id": "claude",
+          "title": {
+            "en": "Anthropic Claude"
+          }
+        },
+        {
+          "id": "openai_compatible",
+          "title": {
+            "en": "OpenAI-Compatible / Local"
+          }
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "model",
+      "required": false,
+      "title": {
+        "en": "Model"
+      },
+      "placeholder": {
+        "en": "Optional - use provider default"
+      }
+    },
+    {
+      "type": "number",
+      "name": "capture_seconds",
+      "title": {
+        "en": "Capture duration in seconds"
+      },
+      "min": 1,
+      "max": 60,
+      "step": 1
+    },
+    {
+      "type": "number",
+      "name": "frame_count",
+      "title": {
+        "en": "Number of frames"
+      },
+      "min": 1,
+      "max": 20,
+      "step": 1
+    },
+    {
+      "type": "text",
+      "name": "prompt",
+      "title": {
+        "en": "Prompt"
+      },
+      "placeholder": {
+        "en": "Describe what happened during this event."
+      }
+    }
+  ],
+  "tokens": [
+    {
+      "name": "summary",
+      "type": "string",
+      "title": {
+        "en": "Summary"
+      }
+    },
+    {
+      "name": "activity",
+      "type": "string",
+      "title": {
+        "en": "Activity"
+      }
+    },
+    {
+      "name": "person_present",
+      "type": "boolean",
+      "title": {
+        "en": "Person Present"
+      }
+    },
+    {
+      "name": "vehicle_present",
+      "type": "boolean",
+      "title": {
+        "en": "Vehicle Present"
+      }
+    },
+    {
+      "name": "delivery_vehicle",
+      "type": "boolean",
+      "title": {
+        "en": "Delivery Vehicle"
+      }
+    },
+    {
+      "name": "delivery_company",
+      "type": "string",
+      "title": {
+        "en": "Delivery Company"
+      }
+    },
+    {
+      "name": "package_present",
+      "type": "boolean",
+      "title": {
+        "en": "Package Present"
+      }
+    },
+    {
+      "name": "package_delivered",
+      "type": "boolean",
+      "title": {
+        "en": "Package Delivered"
+      }
+    },
+    {
+      "name": "person_approaching",
+      "type": "boolean",
+      "title": {
+        "en": "Person Approaching"
+      }
+    },
+    {
+      "name": "person_leaving",
+      "type": "boolean",
+      "title": {
+        "en": "Person Leaving"
+      }
+    },
+    {
+      "name": "vehicle_arrived",
+      "type": "boolean",
+      "title": {
+        "en": "Vehicle Arrived"
+      }
+    },
+    {
+      "name": "vehicle_departed",
+      "type": "boolean",
+      "title": {
+        "en": "Vehicle Departed"
+      }
+    },
+    {
+      "name": "loitering",
+      "type": "boolean",
+      "title": {
+        "en": "Loitering"
+      }
+    },
+    {
+      "name": "security_level",
+      "type": "string",
+      "title": {
+        "en": "Security Level"
+      }
+    },
+    {
+      "name": "confidence",
+      "type": "number",
+      "title": {
+        "en": "Confidence"
+      }
+    },
+    {
+      "name": "provider_used",
+      "type": "string",
+      "title": {
+        "en": "Provider Used"
+      }
+    },
+    {
+      "name": "model_used",
+      "type": "string",
+      "title": {
+        "en": "Model Used"
+      }
+    }
+  ]
+}

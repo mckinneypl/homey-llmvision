@@ -1,0 +1,70 @@
+{
+  "title": {
+    "en": "Send text prompt to AI"
+  },
+  "titleFormatted": {
+    "en": "Send [[prompt]] to [[provider]] using [[model]]"
+  },
+  "hint": {
+    "en": "Send a text-only prompt to the selected AI provider and return the response as an Advanced Flow tag."
+  },
+  "args": [
+    {
+      "type": "dropdown",
+      "name": "provider",
+      "title": {
+        "en": "AI Provider"
+      },
+      "values": [
+        { "id": "openai", "title": { "en": "OpenAI" } },
+        { "id": "gemini", "title": { "en": "Google Gemini" } },
+        { "id": "claude", "title": { "en": "Anthropic Claude" } },
+        { "id": "openai_compatible", "title": { "en": "OpenAI-Compatible / Local" } }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "model",
+      "required": false,
+      "title": {
+        "en": "Model"
+      },
+      "placeholder": {
+        "en": "Optional - use provider default"
+      }
+    },
+    {
+      "type": "text",
+      "name": "prompt",
+      "title": {
+        "en": "Prompt"
+      },
+      "placeholder": {
+        "en": "Enter your prompt"
+      }
+    }
+  ],
+  "tokens": [
+    {
+      "name": "response",
+      "type": "string",
+      "title": {
+        "en": "Response"
+      }
+    },
+    {
+      "name": "provider_used",
+      "type": "string",
+      "title": {
+        "en": "Provider Used"
+      }
+    },
+    {
+      "name": "model_used",
+      "type": "string",
+      "title": {
+        "en": "Model Used"
+      }
+    }
+  ]
+}

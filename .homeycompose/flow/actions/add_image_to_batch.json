@@ -1,0 +1,52 @@
+{
+  "title": {
+    "en": "Add image to batch"
+  },
+  "titleFormatted": {
+    "en": "Add [[droptoken]] from [[source_name]] to image batch [[batch_id]]"
+  },
+  "hint": {
+    "en": "Add one camera image to a multi-camera analysis batch and return the exact frozen image added to the batch."
+  },
+  "droptoken": [
+    "image"
+  ],
+  "args": [
+    {
+      "type": "text",
+      "name": "batch_id",
+      "title": {
+        "en": "Batch name"
+      },
+      "placeholder": {
+        "en": "front_delivery"
+      }
+    },
+    {
+      "type": "text",
+      "name": "source_name",
+      "title": {
+        "en": "Camera name"
+      },
+      "placeholder": {
+        "en": "Driveway"
+      }
+    }
+  ],
+  "tokens": [
+    {
+      "name": "image_count",
+      "type": "number",
+      "title": {
+        "en": "Images in Batch"
+      }
+    },
+    {
+      "name": "captured_image",
+      "type": "image",
+      "title": {
+        "en": "Captured Image"
+      }
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "title": {
+    "en": "Add multiple images to batch"
+  },
+  "titleFormatted": {
+    "en": "Add [[droptoken]] from [[source_name]] to batch [[batch_id]]: [[frame_count]] frames, [[delay_seconds]] seconds apart, batch limit [[batch_limit]]"
+  },
+  "hint": {
+    "en": "Read the supplied Homey image token repeatedly and add each captured frame to a named batch. Whether frames refresh depends on the source image token."
+  },
+  "droptoken": [
+    "image"
+  ],
+  "args": [
+    {
+      "type": "text",
+      "name": "batch_id",
+      "title": {
+        "en": "Batch name"
+      },
+      "placeholder": {
+        "en": "front_perimeter"
+      }
+    },
+    {
+      "type": "text",
+      "name": "source_name",
+      "title": {
+        "en": "Camera name"
+      },
+      "placeholder": {
+        "en": "Front Door"
+      }
+    },
+    {
+      "type": "number",
+      "name": "frame_count",
+      "title": {
+        "en": "Number of frames"
+      },
+      "min": 1,
+      "max": 32,
+      "step": 1
+    },
+    {
+      "type": "number",
+      "name": "delay_seconds",
+      "title": {
+        "en": "Seconds between frames"
+      },
+      "min": 1,
+      "max": 10,
+      "step": 1
+    },
+    {
+      "type": "number",
+      "name": "batch_limit",
+      "title": {
+        "en": "Maximum images in batch"
+      },
+      "min": 12,
+      "max": 32,
+      "step": 1
+    }
+  ],
+  "tokens": [
+    {
+      "name": "frames_requested",
+      "type": "number",
+      "title": {
+        "en": "Frames Requested"
+      }
+    },
+    {
+      "name": "frames_captured",
+      "type": "number",
+      "title": {
+        "en": "Frames Captured"
+      }
+    },
+    {
+      "name": "duplicate_frames",
+      "type": "number",
+      "title": {
+        "en": "Duplicate Frames"
+      }
+    },
+    {
+      "name": "images_in_batch",
+      "type": "number",
+      "title": {
+        "en": "Images in Batch"
+      }
+    },
+    {
+      "name": "last_captured_image",
+      "type": "image",
+      "title": {
+        "en": "Last Captured Image"
+      }
+    },
+    {
+      "name": "capture_status",
+      "type": "string",
+      "title": {
+        "en": "Capture Status"
+      }
+    },
+    {
+      "name": "batch_limit",
+      "type": "number",
+      "title": {
+        "en": "Batch Limit"
+      }
+    }
+  ]
+}
