@@ -45,7 +45,13 @@ class LLMVisionApp extends Homey.App {
         );
 
         return this.providerManager
-          .analyzeCameraActivity(args);
+          .analyzeCameraActivity(
+            args,
+            frame => this.imageBatchManager.createHomeyImageFromDataUrl(
+              frame,
+              'camera activity',
+            ),
+          );
       });
 
     /*

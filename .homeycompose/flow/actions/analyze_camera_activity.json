@@ -206,6 +206,13 @@
       "title": {
         "en": "Model Used"
       }
+    },
+    {
+      "name": "best_image",
+      "type": "image",
+      "title": {
+        "en": "Best Image"
+      }
     }
   ]
 }
