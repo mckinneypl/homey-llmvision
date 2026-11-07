@@ -1,6 +1,6 @@
 {
   "id": "com.percy.llmvision",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "brandColor": "#2563EB",
   "compatibility": ">=12.4.0",
   "sdk": 3,
